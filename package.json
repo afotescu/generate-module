@@ -1,0 +1,27 @@
+{
+  "name": "generate-module",
+  "version": "0.0.1",
+  "description": "Script for generating a module for my projects.",
+  "main": "index.js",
+  "bin": {
+    "gmod": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitalytr/generate-module.git"
+  },
+  "keywords": [],
+  "author": "Vitaly Tr, Artiom Fotescu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vitalytr/generate-module/issues"
+  },
+  "homepage": "https://github.com/vitalytr/generate-module#readme",
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "commander": "^2.9.0"
+  }
+}
