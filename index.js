@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const Promise = require('bluebird');
 const pkg = require('./package.json');
+const apiFileData = require('./apiFileData');
 
 Promise.promisifyAll(fs);
 
@@ -13,17 +14,23 @@ const createModule = (moduleName) => {
     const structureJS = ['controller.js', 'model.js', 'routes.js'];
     const structureSQL = ['get.sql', 'put.sql', 'post.sql', 'delete.sql'];
 
-    let arrOfModules = moduleName.split(',').map(item => path.join(process.cwd(), item));
+    let arrOfModules = moduleName.split(',').map(item => {
+        return {
+            path: path.join(process.cwd(), item),
+            name: item
+        };
+    });
     let tempPathSQL = '';
     for (let i = 0; i < arrOfModules.length; i += 1) {
 
-        tempPathSQL = path.join(arrOfModules[i], 'sql');
+        tempPathSQL = path.join(arrOfModules[i].path, 'sql');
 
-        fs.mkdirAsync(arrOfModules[i])
+        fs.mkdirAsync(arrOfModules[i].path)
             .then(() => {
                 const filesJS = [];
                 structureJS.forEach(item => {
-                    filesJS.push(fs.writeFileAsync(path.join(arrOfModules[i], item), 'Hello Node.js \n Hello again.'));
+                    filesJS.push(fs.writeFileAsync(path.join(arrOfModules[i].path, item),
+                        apiFileData[item.slice(0, -3)](arrOfModules[i].name)));
                 });
                 return Promise.all(filesJS);
             })
