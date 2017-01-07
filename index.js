@@ -12,7 +12,7 @@ Promise.promisifyAll(fs);
 
 const createModule = (moduleName) => {
     const structureJS = ['controller.js', 'model.js', 'routes.js'];
-    const structureSQL = ['get.sql', 'put.sql', 'post.sql', 'delete.sql'];
+    const structureSQL = ['getMany.sql', 'getTotalCount.sql', 'getOne.sql', 'put.sql', 'post.sql', 'delete.sql'];
 
     let arrOfModules = moduleName.split(',').map(item => {
         return {
